@@ -70,11 +70,15 @@ mkdir -p /etc/vault.d/
 touch /etc/vault.d/config.hcl
 touch /etc/systemd/system/vault.service
 adduser vault
+cd /etc/vault.d/
+openssl req -newkey rsa:2048 -nodes -keyout domain.key -x509 -days 365 -out domain.crt
 cat <<EOF > /etc/vault.d/config.hcl
 listener "tcp" {
   address          = "0.0.0.0:8200"
   cluster_address  = "10.142.0.6:8201"
-  tls_disable      = "true"
+  tls_disable      = "false"
+  tls_cert_file="/etc/vault.d/domain.crt"
+  tls_key_file="/etc/vault.d/domain.key"
 }
 
 storage "consul" {
