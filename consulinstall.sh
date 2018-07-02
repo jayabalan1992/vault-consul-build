@@ -1,4 +1,9 @@
 #!/bin/bash
+cd /usr/local/bin
+yum install -y wget unzip
+wget https://releases.hashicorp.com/consul/1.2.0/consul_1.2.0_linux_amd64.zip
+unzip *.zip
+rm -rf *.zip 
 adduser consul
 mkdir -p /etc/consul.d/{bootstrap,server,client}
 mkdir /var/consul
