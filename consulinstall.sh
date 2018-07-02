@@ -51,14 +51,14 @@ WantedBy=multi-user.target
 
 EOF
 
-touch /etc/consul.d/start-consul.sh
-cat <<EOF > /etc/consul.d/start-consul.sh
+touch /etc/consul.d/startconsul.sh
+cat <<EOF > /etc/consul.d/startconsul.sh
 #!/bin/sh
 /usr/local/bin/consul agent -config-file=/usr/local/etc/consul/server_agent.json
 
 EOF
 
-chmod +x /etc/consul.d/start-consul.sh
+chmod +x /etc/consul.d/startconsul.sh
 
 systemctl daemon-reload
 systemctl start consul.service
