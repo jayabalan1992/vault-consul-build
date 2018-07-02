@@ -7,6 +7,7 @@ rm -rf *.zip
 adduser consul
 mkdir -p /etc/consul.d/{bootstrap,server,client}
 mkdir /var/consul
+mkdir /usr/local/etc/consul
 chown consul:consul /var/consul
 touch /etc/systemd/system/consul.service
 touch /usr/local/etc/consul/server_agent.json
