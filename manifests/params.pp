@@ -1,7 +1,4 @@
-
-
 class vault::params {
-
   $user		  =  'vault'
   $manage_user    =  true
   $group          =  'vault'
@@ -17,14 +14,14 @@ class vault::params {
     'tcp' => { 
       'address'     => '127.0.0.1:8200',
       'tls_disable' => true,
-      },
+    },
   }
   $storage  =  {
     'consul'  => {
     'address' => '127.0.0.1:8500',
     'path'    => 'vault/',
     'token'   => '5b5e7638-7f3a-495e-8635-7765e58fcd62',
-     },
+    },
   }
 
 }
