@@ -6,7 +6,7 @@ After=network-online.target
 User=<%= scope['vault::user'] %>
 Group=<%= scope['vault::group'] %>
 PIDFile=/var/run/vault/vault.pid
-ExecStart=/usr/local/bin/vault server -config=/etc/vault.d/config.hcl -log-level=debug
+ExecStart=<%= scope['vault::bin_dir'] %>/vault server -config=<%= scope['vault::config_dir'] %>/config.json -log-level=debug
 ExecReload=/bin/kill -HUP
 KillMode=process
 KillSignal=SIGTERM
