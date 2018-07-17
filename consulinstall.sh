@@ -1,3 +1,5 @@
+#This shell script installs consul servers
+
 #!/bin/bash
 cd /usr/local/bin
 yum install -y wget unzip
@@ -19,9 +21,9 @@ cat << EOF > /usr/local/etc/consul/server_agent.json
   "data_dir": "/var/consul",
   "bind_addr": "0.0.0.0",
   "client_addr": "0.0.0.0",
-  "advertise_addr": "10.142.0.2",
-  "bootstrap_expect": 2,
-  "retry_join": ["10.142.0.2", "10.142.0.4"],
+  "advertise_addr": "<localhost ip>",
+  "bootstrap_expect": 3,
+  "retry_join": ["<server 1 ip>", "<server -2 ip>","server 3 ip>"],
   "ui": true,
   "log_level": "DEBUG",
   "enable_syslog": true,
