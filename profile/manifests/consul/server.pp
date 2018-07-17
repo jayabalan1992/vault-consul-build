@@ -8,7 +8,8 @@ class profile::consul::server {
     'node_name'        => 'server',
     'server'           => true,
     'ui'	       => true, 
-    'advertise_addr'   => $facts['networking']['ip']
+    'advertise_addr'   => '192.168.33.12',
+    'client_addr'      =>  '127.0.0.1',
     }
   }
 }

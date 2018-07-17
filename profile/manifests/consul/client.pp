@@ -1,11 +1,13 @@
 class profile::consul::client {
   class { '::consul':
-  config_hash => {
+  config_hash    => {
     'data_dir'   => '/opt/consul',
     'datacenter' => 'dc1',
     'log_level'  => 'DEBUG',
-    'node_name'  => 'agent',
-    'retry_join' => ['10.0.2.15'],
+    'node_name'  => $facts['hostname'],
+    'retry_join' => ['192.168.33.12'],
+    'bind_addr'  => $facts['networking']['interfaces']['eth1']['ip'],
+    'client_addr'=> '127.0.0.1',
     }
   }
 }

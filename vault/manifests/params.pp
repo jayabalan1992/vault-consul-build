@@ -9,7 +9,7 @@ class vault::params {
   $download_dir   = '/tmp'
   $enable_ui	  =  true
   $disable_mlock  =  false
-  $agent_ip	  =  $facts['networking']['ip']
+  $agent_ip	  =  '192.168.33.11'
   $listener	= {
     'tcp' => { 
       'address'     => '127.0.0.1:8200',
