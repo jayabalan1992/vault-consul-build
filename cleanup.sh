@@ -7,4 +7,4 @@ rm -rf /etc/systemd/system/consul.service
 rm -rf /usr/local/etc/*
 rm -rf /etc/vault.d/
 rm -rf /etc/consul.d/
-
+rm -rf /var/consul
