@@ -21,7 +21,7 @@ cat << EOF > /usr/local/etc/consul/client_agent.json
   "datacenter": "dc1",
   "node_name": "consul_c1",
   "data_dir": "/var/consul/data",
-  "bind_addr": "<localhost-ip>",
+  "bind_addr": "${ hostname -I}",
   "client_addr": "127.0.0.1",
   "retry_join": ["server-1-ip", "server-2-ip","server-3-ip"],    
   "log_level": "DEBUG",
@@ -77,7 +77,7 @@ openssl req -newkey rsa:2048 -nodes -keyout domain.key -x509 -days 365 -out doma
 cat <<EOF > /etc/vault.d/config.hcl
 listener "tcp" {
   address          = "0.0.0.0:8200"
-  cluster_address  = "<localhost ip>:8201"
+  cluster_address  = "$( hostname -I ):8201"
   tls_disable      = "false"
   tls_cert_file="/etc/vault.d/domain.crt"
   tls_key_file="/etc/vault.d/domain.key"
@@ -89,7 +89,7 @@ storage "consul" {
 }
 
 api_addr = "http://<localhost ip>:8200"
-cluster_addr = "https://<localhost ip>:8201"
+cluster_addr = "https://${hostname -I}:8201"
 EOF
 
 cat <<EOF > /etc/systemd/system/vault.service
