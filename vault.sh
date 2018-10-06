@@ -88,7 +88,7 @@ storage "consul" {
 }
 
 api_addr = "http://$localip:8200"
-cluster_addr = "https://$localip:8201"
+cluster_addr = "http://$localip:8201"
 EOF
 
 cat <<EOF > /etc/systemd/system/vault.service
