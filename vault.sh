@@ -1,8 +1,7 @@
-# This is a shell script to install consul client and Vault server 3
-
-!/bin/bash
+#!/bin/bash
 
 ############### Consul Client Installation ####################
+localip=$(hostname -I)
 cd /usr/local/bin
 yum install -y wget unzip
 wget https://releases.hashicorp.com/consul/1.2.0/consul_1.2.0_linux_amd64.zip
@@ -21,7 +20,7 @@ cat << EOF > /usr/local/etc/consul/client_agent.json
   "datacenter": "dc1",
   "node_name": "consul_c1",
   "data_dir": "/var/consul/data",
-  "bind_addr": "${ hostname -I}",
+  "bind_addr": "$localip",
   "client_addr": "127.0.0.1",
   "retry_join": ["server-1-ip", "server-2-ip","server-3-ip"],    
   "log_level": "DEBUG",
@@ -77,7 +76,7 @@ openssl req -newkey rsa:2048 -nodes -keyout domain.key -x509 -days 365 -out doma
 cat <<EOF > /etc/vault.d/config.hcl
 listener "tcp" {
   address          = "0.0.0.0:8200"
-  cluster_address  = "$( hostname -I ):8201"
+  cluster_address  = "$localip:8201"
   tls_disable      = "false"
   tls_cert_file="/etc/vault.d/domain.crt"
   tls_key_file="/etc/vault.d/domain.key"
@@ -88,8 +87,8 @@ storage "consul" {
   path    = "vault/"
 }
 
-api_addr = "http://<localhost ip>:8200"
-cluster_addr = "https://${hostname -I}:8201"
+api_addr = "http://$localip:8200"
+cluster_addr = "https://$localip:8201"
 EOF
 
 cat <<EOF > /etc/systemd/system/vault.service
@@ -116,4 +115,3 @@ EOF
 export VAULT_ADDR='http://127.0.0.1:8200'
 systemctl daemon-reload
 systemctl start vault.service
-
