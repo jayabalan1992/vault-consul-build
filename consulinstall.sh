@@ -1,6 +1,7 @@
 #This shell script installs consul servers
 
 #!/bin/bash
+localip="hostname -I"
 cd /usr/local/bin
 yum install -y wget unzip
 wget https://releases.hashicorp.com/consul/1.2.0/consul_1.2.0_linux_amd64.zip
@@ -21,7 +22,7 @@ cat << EOF > /usr/local/etc/consul/server_agent.json
   "data_dir": "/var/consul",
   "bind_addr": "0.0.0.0",
   "client_addr": "0.0.0.0",
-  "advertise_addr": "<localhost ip>",
+  "advertise_addr": "${localip}",
   "bootstrap_expect": 3,
   "retry_join": ["<server 1 ip>", "<server -2 ip>","server 3 ip>"],
   "ui": true,
