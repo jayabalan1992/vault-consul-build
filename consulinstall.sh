@@ -1,7 +1,7 @@
 #This shell script installs consul servers
 
 #!/bin/bash
-localip="hostname -I"
+localip=$(hostname -I)
 cd /usr/local/bin
 yum install -y wget unzip
 wget https://releases.hashicorp.com/consul/1.2.0/consul_1.2.0_linux_amd64.zip
